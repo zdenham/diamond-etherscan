@@ -16,8 +16,9 @@ The second is a Facet called `DiamondEtherscanFacet.sol` that should implement t
 
 1. Generate your dummy implementation
 2. Deploy your dummy implementation
-3. Set the implementation to point to the dummy
-4. Repeat any time you update the diamond
+3. Add the EtherscanFacet to your diamond
+4. Set the proxy implementation to point to the dummy
+5. Repeat any time you update the diamond
 
 ## Example
 
