@@ -8,7 +8,7 @@ const generateDummyContractForEtherscan = (contractList, { spdxIdentifier, solid
 
   const str = getContractString({ spdxIdentifier, solidityVersion, diamondAddress, signatures, network});
 
-  fs.writeFileSync('./contracts/dummy/DummyDiamondImplementation.sol', str);
+  fs.writeFileSync('./contracts/dummy/DummyDiamondImplementation-dot-sol', str);
 }
 
 const getFormattedSignatures = (contract) => {
@@ -44,14 +44,17 @@ const formatParams = (params) => {
 const memoryTypes = {
     'tuple[]': true,
     'address[]': true,
-    // TODO add more
+    'bytes': true,
+    'string': true,
+    'bytes4[]': true,
+    // TODO add more or find a better way to determine storage type
 }
 
 // TODO - support more complex types
 const formatType = (type) => {
   const storageLocation = memoryTypes[type.type] ? ' memory' : ''
 
-  return type.components ? 'fixmeplease calldata' : type.type + storageLocation;
+  return type.components ? 'fixmeplease memory' : type.type + storageLocation;
 }
 
 const getContractString = ({spdxIdentifier, solidityVersion, signatures, diamondAddress, network}) =>

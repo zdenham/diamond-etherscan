@@ -1,6 +1,14 @@
 
 /* global ethers task */
 require('@nomiclabs/hardhat-waffle')
+require('@nomiclabs/hardhat-etherscan')
+require('dotenv').config();
+
+const {
+  TESTNET_CONTRACT_OWNER_PRIVATE_KEY,
+  RINKEBY_RPC_URL,
+  MAINNET_SCANNER_API_KEY
+} = process.env;
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -25,5 +33,16 @@ module.exports = {
       enabled: true,
       runs: 200
     }
-  }
+  },
+  networks: {
+    rinkeby: {
+      url: RINKEBY_RPC_URL,
+      accounts: [TESTNET_CONTRACT_OWNER_PRIVATE_KEY],
+    },
+  },
+  etherscan: {
+    apiKey: {
+      rinkeby: MAINNET_SCANNER_API_KEY,
+    },
+  },
 }
