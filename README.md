@@ -12,12 +12,20 @@ The first is a script to generate a "Dummy Implementation" of your diamond locat
 
 The second is a Facet called `DiamondEtherscanFacet.sol` that should implement the [EIP-1967](https://eips.ethereum.org/EIPS/eip-1967) so you can point your diamond proxy to that implementation. Because all of your diamonds function signatures are implemented in the dummy, etherscan which knows about eip-1967 will be able to appropriately display function selectors.
 
-## (Untested) How to support etherscan in your diamond
+## How to support etherscan in your diamond
 
 1. Generate your dummy implementation
 2. Deploy your dummy implementation
 3. Set the implementation to point to the dummy
 4. Repeat any time you update the contract
+
+## Example
+
+Here is a live example [contract](https://rinkeby.etherscan.io/address/0xc173ae57b7479b95EA9EF0B1A3C70a61e84d0F30) deployed to rinkeby.
+
+## Note
+
+This was a quick weekend hack, and just tested out on testnet. If there are any improvements / feedbacks pls let me know.
 
 ## TODO
 
