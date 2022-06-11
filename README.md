@@ -25,7 +25,7 @@ Here is a live example [contract](https://rinkeby.etherscan.io/address/0xc173ae5
 
 ## Note
 
-This was a quick weekend hack, and just tested out on testnet. If there are any improvements / feedbacks pls let me know.
+This was a quick weekend hack for a proof of concept. The example isn't fully eip-1967 compliant, and how etherscan responds to updating proxy is currently untested. If there are any other improvements / feedbacks pls let me know.
 
 ## TODO
 
