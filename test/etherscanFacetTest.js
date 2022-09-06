@@ -57,7 +57,12 @@ describe('EtherscanTest', async function () {
 
   it('should return the implementation slot appropriately', async () => {
     await etherscanFacet.setDummyImplementation('0x63492fff405c01121Aec0Ca673d737979d2Ab2e1');
-    const dummy = await etherscanFacet.dummyImplementation();
+    const dummy = await etherscanFacet.implementation();
     expect(dummy).to.equal('0x63492fff405c01121Aec0Ca673d737979d2Ab2e1');
+  })
+
+  it('should emit an upgraded event with the new implementation', async () => {
+    const txn = await etherscanFacet.setDummyImplementation('0x63492fff405c01121Aec0Ca673d737979d2Ab2e1');
+    expect(txn).to.emit('Upgraded').withArgs(['0x63492fff405c01121Aec0Ca673d737979d2Ab2e1'])
   })
 })

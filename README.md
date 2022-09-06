@@ -33,5 +33,4 @@ Also, I'm still not sure if this should be used in production. Its technically l
 ## TODO
 
 - [ ] support more complex types in mock script (may need to declare these)
-- [ ] fully comply to [EIP-1967](https://eips.ethereum.org/EIPS/eip-1967) with events and admin switches in the example
-- [ ] better way of generating storage position for a given parameter
+- [ ] turn the dummy contract generator into a CLI installable via NPM

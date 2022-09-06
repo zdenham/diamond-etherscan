@@ -5,12 +5,12 @@ import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibDiamondEtherscan} from "../libraries/LibDiamondEtherscan.sol";
 
 contract DiamondEtherscanFacet {
-    function setDummyImplementation(address implementation) external {
+    function setDummyImplementation(address _implementation) external {
         LibDiamond.enforceIsContractOwner();
-        LibDiamondEtherscan._setDummyImplementation(implementation);
+        LibDiamondEtherscan._setDummyImplementation(_implementation);
     }
 
-    function dummyImplementation() external view returns (address) {
+    function implementation() external view returns (address) {
         return LibDiamondEtherscan._dummyImplementation();
     }
 }
