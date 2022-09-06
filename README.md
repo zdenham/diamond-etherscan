@@ -32,3 +32,4 @@ Also, I'm still not sure if this should be used in production. Its technically l
 ## TODO
 
 - [ ] support more complex types in mock script (may need to declare these)
+- [ ] turn the dummy contract generator into a CLI installable via NPM
