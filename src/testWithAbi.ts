@@ -1,5 +1,6 @@
 import { fetchFacets } from "./utils/fetchFacets.js";
-import { generateContractCode } from "./utils/generateContractCode.js";
+import { generateDummyContract } from "./utils/generateDummyContract.js";
+import * as fs from "fs";
 
 const main = async () => {
   const facets = await fetchFacets(
@@ -7,17 +8,15 @@ const main = async () => {
     "polygon"
   );
 
-  const contractString = generateContractCode(facets, {
+  const contractString = generateDummyContract(facets, {
     network: "polygon",
     diamondAddress: "0x86935f11c86623dec8a25696e1c19a8659cbf95d",
   });
 
-  console.log("CONTRACT STRING: ", contractString);
-
-  // fs.writeFileSync(
-  //   "./contracts/dummy/DummyDiamondImplementation-dot-sol",
-  //   contractString
-  // );
+  fs.writeFileSync(
+    "./contracts/dummy/DummyDiamondImplementation-dot-sol",
+    contractString
+  );
 };
 
 main();
