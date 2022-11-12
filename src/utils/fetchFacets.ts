@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 import fetch from "node-fetch";
-import { ethers } from "ethers";
+import { Contract, ethers } from "ethers";
 import { NETWORKS } from "./config.js";
 
 const INFURA_API_KEY = process.env["INFURA_API_KEY"] || "";
@@ -37,17 +37,20 @@ const getFacetAbi = async (facetAddress: string, network: string) => {
   return abi;
 };
 
-export const fetchFacetsABI = async (
+export const fetchFacets = async (
   diamondAddress: string,
   network: string
-) => {
+): Promise<Contract[]> => {
   const facetAddresses = await getFacetAddresses(diamondAddress, network);
-  const promises = [];
-  for (let facetAddress of facetAddresses) {
-    promises.push(getFacetAbi(facetAddress, network));
-  }
-  const allAbis = await Promise.all(promises);
 
-  console.log("ALL ABIS!", allAbis);
-  return allAbis;
+  console.log("THE FACETS: ", facetAddresses);
+  const allContracts = [];
+  for (let facetAddress of facetAddresses) {
+    // await for each to prevent hitting rate limits
+    const abi = await getFacetAbi(facetAddress, network);
+
+    allContracts.push(new Contract(facetAddress, abi));
+  }
+
+  return allContracts;
 };
