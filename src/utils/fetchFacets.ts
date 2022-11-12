@@ -42,6 +42,12 @@ export const fetchFacetsABI = async (
   network: string
 ) => {
   const facetAddresses = await getFacetAddresses(diamondAddress, network);
-  const abi = await getFacetAbi(facetAddresses[0], network);
-  console.log("THE ABI: ", abi);
+  const promises = [];
+  for (let facetAddress of facetAddresses) {
+    promises.push(getFacetAbi(facetAddress, network));
+  }
+  const allAbis = await Promise.all(promises);
+
+  console.log("ALL ABIS!", allAbis);
+  return allAbis;
 };
