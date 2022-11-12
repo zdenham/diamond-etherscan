@@ -1,6 +1,6 @@
 // taken from louper.dev
 
-export const NETWORKS = {
+const NETWORKS = {
   mainnet: {
     title: 'Ethereum',
     rpcUrl: 'https://mainnet.infura.io/v3/%INFURA_API_KEY%',
@@ -226,3 +226,5 @@ export const NETWORKS = {
     chainId: '1088',
   },
 }
+
+module.exports = { NETWORKS };
