@@ -22,6 +22,8 @@ export const generateDummyContract = (
     return [...structsArr, ...getFormattedStructs(contract)];
   }, []);
 
+  console.log("STRUCTS: ", structs);
+
   const signatures = facetList.reduce((signaturesArr, contract) => {
     return [...signaturesArr, ...getFormattedSignatures(contract)];
   }, []);
@@ -92,7 +94,7 @@ const formatParams = (params: ParamType[]): string => {
 
 const formatType = (type: ParamType) => {
   const storageLocation = getStorageLocationForType(type.type);
-  const formattedType = type.components ? formatComponentType(type) : type.type;
+  const formattedType = type.components ? getTupleName(type) : type.type;
 
   return `${formattedType} ${storageLocation}`;
 };
@@ -117,8 +119,9 @@ const getStorageLocationForType = (type: string): string => {
   }
 };
 
-const formatComponentType = (type: ParamType) => {
-  return "";
+// TODO - make standard way to name new structs
+const getTupleName = (type: ParamType) => {
+  return "Tuple";
 };
 
 // declare structs used in function arguments
@@ -141,13 +144,33 @@ const getFormattedStructs = (facet: Contract) => {
 
 const getFormattedStructsFromParams = (params: ParamType[]): string[] => {
   return params
-    .map((param) => maybeFormatStruct(param))
-    .flat(10)
-    .filter((struct) => !!struct);
+    .map(recursiveFormatStructs)
+    .flat()
+    .filter((str) => str.indexOf("struct ") !== -1);
 };
 
-const maybeFormatStruct = (param: ParamType): (string | string[])[] => {
+const recursiveFormatStructs = (param: ParamType): string[] => {
+  // base case
   if (!param.components) {
     return [""];
   }
+
+  const otherStructs = param.components
+    .map(recursiveFormatStructs)
+    .flat()
+    .filter((str) => str.indexOf("struct ") !== -1);
+
+  const structMembers = param.components.map(formatStructMember);
+  const struct = `struct ${getTupleName(param)} {${structMembers.reduce(
+    (allMembers, member) => `${allMembers}${member}`,
+    ""
+  )}\n}`;
+
+  return [struct, ...otherStructs];
+};
+
+const formatStructMember = (param: ParamType) => {
+  return `\n    ${param.components ? getTupleName(param) : param.baseType} ${
+    param.name
+  };`;
 };
