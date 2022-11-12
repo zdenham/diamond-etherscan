@@ -12,10 +12,12 @@ const main = async () => {
     diamondAddress: "0x86935f11c86623dec8a25696e1c19a8659cbf95d",
   });
 
-  fs.writeFileSync(
-    "./contracts/dummy/DummyDiamondImplementation-dot-sol",
-    contractString
-  );
+  console.log("CONTRACT STRING: ", contractString);
+
+  // fs.writeFileSync(
+  //   "./contracts/dummy/DummyDiamondImplementation-dot-sol",
+  //   contractString
+  // );
 };
 
 main();

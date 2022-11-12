@@ -1,11 +1,11 @@
 import { Contract } from "ethers";
-import fs from "fs";
+// import fs from "fs";
 
 type GenerateContractParams = {
-  spdxIdentifier: string;
-  solidityVersion: string;
   diamondAddress: string;
   network: string;
+  spdxIdentifier?: string;
+  solidityVersion?: string;
 };
 
 export const generateContractCode = (
