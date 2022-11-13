@@ -193,9 +193,9 @@ const recursiveFormatStructs = (param: ParamType): string[] => {
 };
 
 const formatStructMember = (param: ParamType) => {
-  return `\n        ${
-    param.components ? getTupleName(param) : param.baseType
-  } ${param.name};`;
+  return `\n        ${param.components ? getTupleName(param) : param.type} ${
+    param.name
+  };`;
 };
 
 const dedoop = (str: string, index: number, allmembers: string[]) => {
