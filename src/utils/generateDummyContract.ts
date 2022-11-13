@@ -1,12 +1,17 @@
 import { Contract } from "ethers";
 import type { FunctionFragment, ParamType } from "ethers/lib/utils.js";
-// import fs from "fs";
+import ethers from "ethers";
 
 type GenerateContractParams = {
   diamondAddress: string;
   network: string;
   spdxIdentifier?: string;
   solidityVersion?: string;
+};
+
+type GetContractStringParams = GenerateContractParams & {
+  signatures: string[];
+  structs: string[];
 };
 
 export const generateDummyContract = (
@@ -18,21 +23,24 @@ export const generateDummyContract = (
     network,
   }: GenerateContractParams
 ): string => {
-  const structs = facetList.reduce((structsArr, contract) => {
-    return [...structsArr, ...getFormattedStructs(contract)];
-  }, []);
+  const structs = facetList
+    .reduce((structsArr, contract) => {
+      return [...structsArr, ...getFormattedStructs(contract)];
+    }, [])
+    .filter(dedoop);
 
-  console.log("STRUCTS: ", structs);
-
-  const signatures = facetList.reduce((signaturesArr, contract) => {
-    return [...signaturesArr, ...getFormattedSignatures(contract)];
-  }, []);
+  const signatures = facetList
+    .reduce((signaturesArr, contract) => {
+      return [...signaturesArr, ...getFormattedSignatures(contract)];
+    }, [])
+    .filter(dedoop);
 
   const str = getContractString({
     spdxIdentifier,
     solidityVersion,
     diamondAddress,
     signatures,
+    structs,
     network,
   });
 
@@ -43,9 +51,10 @@ const getContractString = ({
   spdxIdentifier,
   solidityVersion,
   signatures,
+  structs,
   diamondAddress,
   network,
-}) => `
+}: GetContractStringParams) => `
 // SPDX-License-Identifier: ${spdxIdentifier || "MIT"}
 pragma solidity ${solidityVersion || "^0.8.0"};
 
@@ -55,7 +64,11 @@ pragma solidity ${solidityVersion || "^0.8.0"};
  * https://louper.dev/diamond/${diamondAddress}?network=${network}
  */
 
-contract DummyDiamondImplementation {${signatures.reduce((all, sig) => {
+contract DummyDiamondImplementation {
+${structs.reduce((all, struct) => {
+  return `${all}${struct}\n\n`;
+}, "")}
+${signatures.reduce((all, sig) => {
   return `${all || "    "}${"\n\n"}   ${sig}`;
 }, "")}
 }
@@ -119,10 +132,20 @@ const getStorageLocationForType = (type: string): string => {
   }
 };
 
-// TODO - make standard way to name new structs
-const getTupleName = (type: ParamType) => {
-  return "Tuple";
+// deterministic naming convention
+const getTupleName = (param: ParamType) => {
+  return "Tuple" + hashCode(JSON.stringify(param));
 };
+
+function hashCode(str: string) {
+  let hash = 0;
+  for (let i = 0, len = str.length; i < len; i++) {
+    let chr = str.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash.toString().substring(3, 10);
+}
 
 // declare structs used in function arguments
 const getFormattedStructs = (facet: Contract) => {
@@ -146,7 +169,7 @@ const getFormattedStructsFromParams = (params: ParamType[]): string[] => {
   return params
     .map(recursiveFormatStructs)
     .flat()
-    .filter((str) => str.indexOf("struct ") !== -1);
+    .filter((str) => str.indexOf(" struct ") !== -1);
 };
 
 const recursiveFormatStructs = (param: ParamType): string[] => {
@@ -158,19 +181,29 @@ const recursiveFormatStructs = (param: ParamType): string[] => {
   const otherStructs = param.components
     .map(recursiveFormatStructs)
     .flat()
-    .filter((str) => str.indexOf("struct ") !== -1);
+    .filter((str) => str.indexOf(" struct ") !== -1);
 
   const structMembers = param.components.map(formatStructMember);
-  const struct = `struct ${getTupleName(param)} {${structMembers.reduce(
+  const struct = `    struct ${getTupleName(param)} {${structMembers.reduce(
     (allMembers, member) => `${allMembers}${member}`,
     ""
-  )}\n}`;
+  )}\n    }`;
 
   return [struct, ...otherStructs];
 };
 
 const formatStructMember = (param: ParamType) => {
-  return `\n    ${param.components ? getTupleName(param) : param.baseType} ${
-    param.name
-  };`;
+  return `\n        ${
+    param.components ? getTupleName(param) : param.baseType
+  } ${param.name};`;
+};
+
+const dedoop = (str: string, index: number, allmembers: string[]) => {
+  for (let i = 0; i < index; i++) {
+    if (allmembers[i] === str) {
+      return false;
+    }
+  }
+
+  return true;
 };
