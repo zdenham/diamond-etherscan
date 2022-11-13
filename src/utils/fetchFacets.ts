@@ -42,7 +42,6 @@ export const fetchFacets = async (
   network: string
 ): Promise<Contract[]> => {
   let facetAddresses = await getFacetAddresses(diamondAddress, network);
-  facetAddresses = [facetAddresses[0]];
   const allContracts = [];
   for (let facetAddress of facetAddresses) {
     // await for each to prevent hitting rate limits

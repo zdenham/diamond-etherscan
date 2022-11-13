@@ -1,6 +1,5 @@
 import { Contract } from "ethers";
 import type { FunctionFragment, ParamType } from "ethers/lib/utils.js";
-import ethers from "ethers";
 
 type GenerateContractParams = {
   diamondAddress: string;
@@ -66,7 +65,7 @@ pragma solidity ${solidityVersion || "^0.8.0"};
 
 contract DummyDiamondImplementation {
 ${structs.reduce((all, struct) => {
-  return `${all}${struct}\n\n`;
+  return `${all}\n\n${struct}`;
 }, "")}
 ${signatures.reduce((all, sig) => {
   return `${all || "    "}${"\n\n"}   ${sig}`;
@@ -107,9 +106,25 @@ const formatParams = (params: ParamType[]): string => {
 
 const formatType = (type: ParamType) => {
   const storageLocation = getStorageLocationForType(type.type);
-  const formattedType = type.components ? getTupleName(type) : type.type;
+
+  const arrString = getArrayString(type);
+  const formattedType = type.components
+    ? getTupleName(type) + arrString
+    : type.type;
 
   return `${formattedType} ${storageLocation}`;
+};
+
+const getArrayString = (type: ParamType): string => {
+  if (!type.arrayLength) {
+    return "";
+  }
+
+  if (type.arrayLength === -1) {
+    return "[]";
+  }
+
+  return `[${type.arrayLength}]`;
 };
 
 const getStorageLocationForType = (type: string): string => {
@@ -193,9 +208,10 @@ const recursiveFormatStructs = (param: ParamType): string[] => {
 };
 
 const formatStructMember = (param: ParamType) => {
-  return `\n        ${param.components ? getTupleName(param) : param.type} ${
-    param.name
-  };`;
+  const arrString = getArrayString(param);
+  return `\n        ${
+    param.components ? getTupleName(param) + arrString : param.type
+  } ${param.name};`;
 };
 
 const dedoop = (str: string, index: number, allmembers: string[]) => {
