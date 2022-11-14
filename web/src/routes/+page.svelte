@@ -64,7 +64,16 @@
 
 <div class="wrapper">
 	<div class="header">
-		<h1>Diamond Etherscan</h1>
+		<div>
+			<h1>Diamond Etherscan</h1>
+			<div style="color: grey">
+				Built with 💎 by <a
+					style="color: grey"
+					href="https://twitter.com/zac_denham"
+					target="_blank">zac_denham</a
+				>
+			</div>
+		</div>
 		<GithubButton />
 	</div>
 
