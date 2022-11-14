@@ -8,6 +8,8 @@ And so, we are left with diamond etherscan, a workaround to support etherscan in
 
 ### **(New!)** Via the Website UI: 
 
+<img width="973" alt="Screen Shot 2022-11-13 at 10 52 54 PM" src="https://user-images.githubusercontent.com/16373521/201594198-de153e9f-3b31-425b-bb89-13c5ed9bdef9.png">
+
 1. Input your diamond address and network on the diamond etherscan website
 2. Generate your dummy diamond implementation
 
