@@ -1,9 +1,11 @@
 <p align="center">
-  <img width="300px" alt="etherscan diamond" src="https://user-images.githubusercontent.com/16373521/201745986-08ad050e-df47-4839-8ac1-2916c7f37bb6.png">
+  <img width="300px; margin-top: 10px;" alt="etherscan diamond" src="https://user-images.githubusercontent.com/16373521/201745986-08ad050e-df47-4839-8ac1-2916c7f37bb6.png">
 </p>
 <p align="center">
   <b style="font-size: 30px">
-    Diamond Etherscan
+    <h3>
+      Diamond Etherscan
+    </h3>
   </b>
   <br/>
   <i>
