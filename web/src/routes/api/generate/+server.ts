@@ -24,6 +24,7 @@ export const POST: RequestHandler<Params, Output> = async ({ request }) => {
 
 		return json({ contract });
 	} catch (e) {
+		console.log('THE FULL ERROR', e);
 		throw error(500, e.message);
 	}
 };
