@@ -3,8 +3,8 @@ import { generateDummyContract } from "../utils/generateDummyContract.js";
 import * as fs from "fs";
 
 const main = async () => {
-  const diamondAddress = process.argv[3];
-  const network = process.argv[4];
+  const diamondAddress = process.argv[2];
+  const network = process.argv[3];
 
   if (!diamondAddress || !network) {
     throw new Error("missing argument");
