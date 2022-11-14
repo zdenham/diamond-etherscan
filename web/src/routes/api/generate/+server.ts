@@ -1,11 +1,11 @@
 import type { RequestHandler } from '@sveltejs/kit';
-import { fetchFacets } from '../../../../utils/fetchFacets';
-import { generateDummyContract } from '../../../../utils/generateDummyContract';
+import { fetchFacets } from '../../../../../utils/fetchFacets.js';
+import { generateDummyContract } from '../../../../../utils/generateDummyContract.js';
 
 type Params = any;
 type Output = any;
 
-export const post: RequestHandler<Params, Output> = async ({ request }) => {
+export const POST: RequestHandler<Params, Output> = async ({ request }) => {
 	const body = await request.json();
 	const { network, diamondAddress } = body;
 

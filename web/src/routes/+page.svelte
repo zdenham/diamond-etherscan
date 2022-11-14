@@ -16,10 +16,27 @@
 	const generateDummy = async () => {
 		try {
 			loading = true;
+
+			const res = await fetch('/api/generate', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					network,
+					diamondAddress
+				})
+			});
+
+			const { contract } = await res.json();
+
+			console.log('CONTRACT: ', contract);
+
+			dummyContract = contract;
 		} catch (e) {
 			err = e.message;
 		} finally {
-			// loading = false;
+			loading = false;
 		}
 	};
 </script>
