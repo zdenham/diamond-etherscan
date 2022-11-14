@@ -1,6 +1,7 @@
 <script lang="ts">
 	import GithubButton from '../components/GithubButton.svelte';
 	import Lottie from '../components/Lottie.svelte';
+	import animationData from '../lottie/diamond.json';
 
 	export const networkNames = {
 		goerli: 'Goerli',
@@ -119,7 +120,7 @@
 		{#if loading}
 			<div class="preload">
 				<div class="lottie">
-					<Lottie path={'/diamond.json'} loop />
+					<Lottie {animationData} loop />
 				</div>
 				<div class="label" style="text-align: center">
 					Generating your dummy contract. Patience, you may require...

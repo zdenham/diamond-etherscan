@@ -4,7 +4,7 @@
 
 	export let loop: boolean = false;
 	export let autoplay: boolean = true;
-	export let path: string;
+	export let animationData: any;
 	let el: HTMLDivElement;
 
 	onMount(() => {
@@ -13,7 +13,7 @@
 			renderer: 'svg',
 			loop,
 			autoplay,
-			path
+			animationData
 		});
 	});
 </script>
