@@ -1,8 +1,26 @@
 <script lang="ts">
 	import Lottie from '../components/Lottie.svelte';
 
+	export const networkNames = {
+		goerli: 'Goerli',
+		polygon: 'Polygon',
+		mainnet: 'Mainnet'
+	};
+
 	let diamondAddress: string = '';
 	let loading: boolean = false;
+	let network = 'goerli';
+	let err = '';
+
+	const generateDummy = async () => {
+		try {
+			loading = true;
+		} catch (e) {
+			err = e.message;
+		} finally {
+			// loading = false;
+		}
+	};
 </script>
 
 <div class="wrapper">
@@ -21,17 +39,96 @@
 		</a>
 	</div>
 
-	{#if loading}
-		<div class="preload">
-			<Lottie path={'/diamond.json'} loop />
-		</div>
-	{/if}
+	<div class="main">
+		{#if !loading && !err}
+			<div class="left-justify">
+				<h1>Enter Your Diamond Details</h1>
+				<div class="label">
+					Make your EIP-2535 diamond etherscan compatible with a generated dummy contract. Read more
+					details about how this works <a
+						target="_blank"
+						href="https://github.com/zdenham/diamond-etherscan"
+						rel="noreferrer">here</a
+					>
+				</div>
+			</div>
+			<form class="form">
+				<input
+					bind:value={diamondAddress}
+					placeholder="Your diamond address, e.g. 0x124..."
+					autofocus
+				/>
+				<select bind:value={network}>
+					<option value="goerli">{networkNames['goerli']}</option>
+					<option value="mainnet">{networkNames['mainnet']}</option>
+					<option value="polygon">{networkNames['polygon']}</option>
+				</select>
+				<button on:click={generateDummy}>Generate Dummy Contract</button>
+			</form>
+		{/if}
+
+		{#if loading}
+			<div class="preload">
+				<Lottie path={'/diamond.json'} loop />
+				<div class="label" style="text-align: center">
+					Generating your dummy contract. Patience, you may require...
+				</div>
+			</div>
+		{/if}
+
+		{#if err}
+			<div class="left-justify">
+				<h1>An Error Occured!</h1>
+				<div class="label">{err}</div>
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>
+	.main {
+		display: flex;
+		min-height: 75vh;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+
+	.left-justify {
+		text-align: left;
+		width: 525px;
+		box-sizing: border-box;
+	}
+
 	.preload {
 		width: 300px;
 		height: 300px;
+	}
+
+	.form {
+		margin-top: 50px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.header {
+		border-bottom: 1px solid lightgrey;
+		display: flex;
+		width: 100vw;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 15px 30px;
+		align-items: center;
+		box-sizing: border-box;
+	}
+
+	h1 {
+		margin: 0px;
+	}
+
+	.label {
+		color: grey;
+		margin-top: 25px;
 	}
 
 	.wrapper {
@@ -53,6 +150,52 @@
 		src: url('/NunitoSans-SemiBold.ttf');
 	}
 
-	.header {
+	input {
+		border: none;
+		border-bottom: 1px dashed lightgrey;
+		outline: none;
+		font-family: monospace;
+		font-size: 20px;
+		padding: 10px 5px;
+		width: 525px;
+		resize: none;
+		color: grey;
+		box-sizing: border-box;
+	}
+
+	select {
+		box-sizing: border-box;
+		outline: none;
+		border: none;
+		border: 1px solid #1f271b;
+		padding: 10px 10px;
+		margin-top: 25px;
+		border-radius: 5px;
+		color: #1f271b;
+		width: 100%;
+		font-size: 18px;
+		font-family: 'NunitoSans';
+		text-align: center;
+		margin-right: 2%;
+	}
+
+	input::placeholder {
+		color: lightgrey;
+	}
+
+	button {
+		width: 100%;
+		margin-top: 25px;
+		border-radius: 5px;
+		padding: 15px 10px;
+		background: #1f271b;
+		color: white;
+		border: none;
+		font-size: 18px;
+		cursor: pointer;
+	}
+
+	a {
+		color: #1f271b;
 	}
 </style>
