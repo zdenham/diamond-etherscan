@@ -17,7 +17,7 @@ The second is a Facet called [`DiamondEtherscanFacet.sol`](https://github.com/zd
 
 ## How to support etherscan in your diamond
 
-1. Generate your dummy implementation (via the website / cli or manually)
+1. Generate your dummy implementation (via the [website](https://etherscan.diamonds.dev/) / cli or manually)
 2. Deploy your dummy implementation
 3. Add the EtherscanFacet to your diamond
 4. Set the proxy implementation to point to the deployed dummy
@@ -26,11 +26,11 @@ The second is a Facet called [`DiamondEtherscanFacet.sol`](https://github.com/zd
 
 ## Generating your dummy implementation
 
-### **(New!)** Via the Website UI: 
+### **(New!)** Via the [Website](https://etherscan.diamonds.dev) UI: 
 
 <img width="973" alt="Screen Shot 2022-11-13 at 10 52 54 PM" src="https://user-images.githubusercontent.com/16373521/201594198-de153e9f-3b31-425b-bb89-13c5ed9bdef9.png">
 
-1. Input your diamond address and network on the diamond etherscan website
+1. Input your diamond address and network on the diamond etherscan [website](https://etherscan.diamonds.dev/)
 2. Generate your dummy diamond implementation
 
 ### Via the CLI
@@ -44,8 +44,6 @@ yarn run generate-dummy [0xyourdiamondaddress] [yourNetwork]
 ```
 
 The dummy contract will be written to `contracts/dummy/DummyDiamondImplementation.sol`
-
-
 
 ## Example
 

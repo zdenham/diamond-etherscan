@@ -30,12 +30,9 @@
 			});
 
 			if (!res.ok) {
-				console.log('RES:');
 				const { message } = await res.json();
 				throw new Error(message);
 			}
-
-			console.log('OKAY', res.ok);
 
 			const { contract } = await res.json();
 
