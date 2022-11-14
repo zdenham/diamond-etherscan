@@ -37,6 +37,22 @@
 			loading = false;
 		}
 	};
+
+	function download() {
+		var element = document.createElement('a');
+		element.setAttribute(
+			'href',
+			'data:text/plain;charset=utf-8,' + encodeURIComponent(dummyContract)
+		);
+		element.setAttribute('download', 'DummyDiamond.sol');
+
+		element.style.display = 'none';
+		document.body.appendChild(element);
+
+		element.click();
+
+		document.body.removeChild(element);
+	}
 </script>
 
 <div class="wrapper">
@@ -84,7 +100,8 @@
 		{/if}
 
 		{#if dummyContract}
-			<textarea value={dummyContract} />
+			<textarea value={dummyContract} disabled />
+			<button style="width: 900px" on:click={download}>Download Dummy Contract</button>
 		{/if}
 
 		{#if loading}
@@ -224,15 +241,18 @@
 		outline: none;
 		font-family: monospace;
 		font-size: 18px;
-		width: 800px;
-		height: 600px;
+		width: 900px;
+		height: 400px;
 		resize: none;
 		color: grey;
 		border: 1px solid lightgrey;
 		border-radius: 6px;
-		margin-bottom: 30px;
+		margin-top: 30px;
 		background: transparent;
 		backdrop-filter: blur(2px);
 		padding: 15px;
+		overflow-x: scroll;
+		white-space: pre;
+		box-sizing: border-box;
 	}
 </style>
