@@ -15,7 +15,7 @@ const getFacetAddresses = async (diamondAddress: string, network: string) => {
   let rpcUrl = network ? NETWORKS[network].rpcUrl : NETWORKS["mainnet"].rpcUrl;
   rpcUrl = rpcUrl.replace("%INFURA_API_KEY%", INFURA_API_KEY);
 
-  console.log("RPC: ", rpcUrl, network);
+  console.log("RPC: ", rpcUrl, network, process.env);
   const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
   const diamondContract = new ethers.Contract(diamondAddress, abi, provider);
   const facets = await diamondContract.facets();
