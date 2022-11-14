@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300px" src="https://user-images.githubusercontent.com/16373521/201744337-6c333ed0-6f3b-440f-8f00-f22a195cb08d.png" title="Logo"/>
+  <img width="300px" alt="etherscan diamond" src="https://user-images.githubusercontent.com/16373521/201745986-08ad050e-df47-4839-8ac1-2916c7f37bb6.png">
 </p>
 <p align="center">
   <b style="font-size: 30px">
