@@ -1,5 +1,7 @@
 # Diamond Etherscan
 
+## Motivation
+
 [EIP-2535 Diamond Standard](https://github.com/ethereum/EIPs/issues/2535) is really cool. But etherscan (the most popular block explorer) doesn't support diamonds yet. [Louper](https://louper.dev) is a great tool that solves this issue, but many users have more experience with etherscan and might prefer to interact with the contract there.
 
 And so, we are left with diamond etherscan, a workaround to support etherscan interactions with diamonds.
