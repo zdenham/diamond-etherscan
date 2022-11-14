@@ -7,7 +7,7 @@
   </b>
   <br/>
   <i>
-    Make your <a href="https://eips.ethereum.org/EIPS/eip-2535" target="_blank">EIP-2535</a> diamond <a href="https://eips.ethereum.org/EIPS/eip-2535" target="_blank">etherscan</a> compatible. <br/> Generate your dummy diamond at <a target="_blank" href="https://etherscan.diamonds.dev">etherscan.diamonds.dev</a>.
+    Make your <a href="https://eips.ethereum.org/EIPS/eip-2535" target="_blank">EIP-2535</a> diamond <a href="https://eips.ethereum.org/EIPS/eip-2535" target="_blank">etherscan</a> compatible. <br/> Generate your dummy diamond at <a target="_blank" href="https://etherscan.diamonds.dev">etherscan.diamonds.dev</a>
   </i>
 </p>
 
@@ -35,6 +35,8 @@ The second is a Facet called [`DiamondEtherscanFacet.sol`](https://github.com/zd
 
 
 ## Generating your dummy implementation
+
+We have built a few tools to make it easier to generate a dummy implementation of your diamond.
 
 ### **(New!)** Via the [Website](https://etherscan.diamonds.dev) UI: 
 
