@@ -99,6 +99,12 @@
 		{#if dummyContract}
 			<textarea value={dummyContract} disabled />
 			<button style="width: 900px" on:click={download}>Download Dummy Contract</button>
+			<div class="label">
+				Set the above contract as your dummy implementation on the <a
+					href="https://github.com/zdenham/diamond-etherscan/blob/main/contracts/facets/DiamondEtherscanFacet.sol"
+					target="_blank">diamond etherscan facet</a
+				>
+			</div>
 		{/if}
 
 		{#if loading}
