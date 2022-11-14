@@ -29,10 +29,19 @@
 				})
 			});
 
+			if (!res.ok) {
+				console.log('RES:');
+				const { message } = await res.json();
+				throw new Error(message);
+			}
+
+			console.log('OKAY', res.ok);
+
 			const { contract } = await res.json();
 
 			dummyContract = contract;
 		} catch (e) {
+			console.log('CAUGHT: ', e);
 			err = e.message;
 		} finally {
 			loading = false;
@@ -97,7 +106,9 @@
 
 		{#if loading}
 			<div class="preload">
-				<Lottie path={'/diamond.json'} loop />
+				<div class="lottie">
+					<Lottie path={'/diamond.json'} loop />
+				</div>
 				<div class="label" style="text-align: center">
 					Generating your dummy contract. Patience, you may require...
 				</div>
@@ -122,6 +133,11 @@
 		flex-direction: column;
 	}
 
+	.lottie {
+		width: 300px;
+		height: 300px;
+	}
+
 	.left-justify {
 		text-align: left;
 		width: 525px;
@@ -130,7 +146,6 @@
 
 	.preload {
 		width: 300px;
-		height: 300px;
 	}
 
 	.form {
