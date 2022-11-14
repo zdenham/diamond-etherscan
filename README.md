@@ -3,9 +3,7 @@
 </p>
 <p align="center">
   <b style="font-size: 30px">
-    <h3>
-      Diamond Etherscan
-    </h3>
+    Diamond Etherscan
   </b>
   <br/>
   <i>
