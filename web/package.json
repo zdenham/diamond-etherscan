@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"dotenv": "^16.0.3",
 		"lottie-web": "^5.9.6"
 	}
 }

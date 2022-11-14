@@ -26,8 +26,9 @@ type ExplorerResponse = {
 };
 
 const getFacetAbi = async (facetAddress: string, network: string) => {
+  const explorerKey = process.env[`${network.toUpperCase()}_EXPLORER_API_KEY`];
   const apiUrl = NETWORKS[network].explorerApiUrl;
-  const fullUrl = `${apiUrl}?module=contract&action=getsourcecode&address=${facetAddress}&apikey=${process.env.EXPLORER_API_KEY}`;
+  const fullUrl = `${apiUrl}?module=contract&action=getsourcecode&address=${facetAddress}&apikey=${explorerKey}`;
 
   const res = await fetch(fullUrl);
   const data = (await res.json()) as ExplorerResponse;
