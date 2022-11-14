@@ -20,7 +20,7 @@
 			const res = await fetch('/api/generate', {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					'content-type': 'application/json'
 				},
 				body: JSON.stringify({
 					network,
@@ -29,8 +29,6 @@
 			});
 
 			const { contract } = await res.json();
-
-			console.log('CONTRACT: ', contract);
 
 			dummyContract = contract;
 		} catch (e) {
@@ -58,7 +56,7 @@
 	</div>
 
 	<div class="main">
-		{#if !loading && !err}
+		{#if !loading && !err && !dummyContract}
 			<div class="left-justify">
 				<h1>Enter Your Diamond Details</h1>
 				<div class="label">
@@ -83,6 +81,10 @@
 				</select>
 				<button on:click={generateDummy}>Generate Dummy Contract</button>
 			</form>
+		{/if}
+
+		{#if dummyContract}
+			<textarea value={dummyContract} />
 		{/if}
 
 		{#if loading}
@@ -215,5 +217,22 @@
 
 	a {
 		color: #1f271b;
+	}
+
+	textarea {
+		border: none;
+		outline: none;
+		font-family: monospace;
+		font-size: 18px;
+		width: 800px;
+		height: 600px;
+		resize: none;
+		color: grey;
+		border: 1px solid lightgrey;
+		border-radius: 6px;
+		margin-bottom: 30px;
+		background: transparent;
+		backdrop-filter: blur(2px);
+		padding: 15px;
 	}
 </style>
