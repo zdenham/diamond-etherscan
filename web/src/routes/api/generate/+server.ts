@@ -2,6 +2,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { fetchFacets } from '../../../../../utils/fetchFacets.js';
 import { generateDummyContract } from '../../../../../utils/generateDummyContract.js';
 import { json } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 
 type Params = any;
 type Output = any;
@@ -12,7 +13,7 @@ export const POST: RequestHandler<Params, Output> = async ({ request }) => {
 		const { network, diamondAddress } = body;
 
 		if (!network || !diamondAddress) {
-			return json({ msg: 'bad input' });
+			throw error(400, 'bad input');
 		}
 
 		const facets = await fetchFacets(diamondAddress, network);
@@ -23,6 +24,6 @@ export const POST: RequestHandler<Params, Output> = async ({ request }) => {
 
 		return json({ contract });
 	} catch (e) {
-		return json({ msg: e.message });
+		throw error(500, e.message);
 	}
 };
