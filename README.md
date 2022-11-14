@@ -1,13 +1,12 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/16373521/201744337-6c333ed0-6f3b-440f-8f00-f22a195cb08d.png" title="Logo"/>
+  <img width="250px" src="https://user-images.githubusercontent.com/16373521/201744337-6c333ed0-6f3b-440f-8f00-f22a195cb08d.png" title="Logo"/>
 </p>
 <p align="center">
-
   <b>
     Diamond Etherscan
   </b>
   <br/>
-  Make your [EIP-2535](https://eips.ethereum.org/EIPS/eip-2535) diamond [etherscan](https://etherscan.io) compatible.
+  Make your <a href="https://eips.ethereum.org/EIPS/eip-2535" target="_blank">EIP-2535</a> diamond <a href="https://eips.ethereum.org/EIPS/eip-2535" target="_blank">etherscan</a>(https://etherscan.io) compatible.
 </p>
 
 ## Motivation
