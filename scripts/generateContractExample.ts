@@ -1,5 +1,5 @@
-import { fetchFacets } from "./utils/fetchFacets.js";
-import { generateDummyContract } from "./utils/generateDummyContract.js";
+import { fetchFacets } from "../utils/fetchFacets.js";
+import { generateDummyContract } from "../utils/generateDummyContract.js";
 import * as fs from "fs";
 
 const main = async () => {

@@ -11,6 +11,7 @@
 	let loading: boolean = false;
 	let network = 'goerli';
 	let err = '';
+	let dummyContract = '';
 
 	const generateDummy = async () => {
 		try {
@@ -28,10 +29,10 @@
 		<h1>Diamond Etherscan</h1>
 		<a
 			class="github-button"
-			href="https://github.com/zdenham/redis-ipfs"
+			href="https://github.com/zdenham/diamond-etherscan"
 			data-size="large"
 			data-show-count="true"
-			aria-label="Star zdenham/redis-ipfs on GitHub"
+			aria-label="Star zdenham/diamond-etherscan on GitHub"
 			target="_blank"
 			rel="noreferrer"
 		>

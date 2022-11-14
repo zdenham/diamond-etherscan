@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": "\\.svelte",
+        "cmd": "cd web && yarn format"
+      }
+    ]
+  }
+}
