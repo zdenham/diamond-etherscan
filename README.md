@@ -4,6 +4,23 @@
 
 And so, we are left with diamond etherscan, a workaround to support etherscan interactions with diamonds.
 
+## How it works
+
+Diamond Etherscan has two components.
+
+The first is a script to generate a "Dummy Implementation" of your diamond located at [`scripts/runGenerateDummy.ts`](https://github.com/zdenham/diamond-etherscan/blob/main/scripts/runGenerateDummy.ts). This uses the etherscan API to grab all of your facets' ABI and then generates a noop mock of your whole diamond. **Note** this will only work for verified facets.
+
+The second is a Facet called [`DiamondEtherscanFacet.sol`](https://github.com/zdenham/diamond-etherscan/blob/main/contracts/facets/DiamondEtherscanFacet.sol) that implements [EIP-1967](https://eips.ethereum.org/EIPS/eip-1967) so you can point your diamond proxy to that implementation. Because all of your diamonds function signatures are implemented in the dummy, etherscan which knows about EIP-1967 will be able to appropriately display functions for interaction.
+
+## How to support etherscan in your diamond
+
+1. Generate your dummy implementation (via the website / cli or manually)
+2. Deploy your dummy implementation
+3. Add the EtherscanFacet to your diamond
+4. Set the proxy implementation to point to the deployed dummy
+5. Repeat any time you update the diamond
+
+
 ## Generating your dummy implementation
 
 ### **(New!)** Via the Website UI: 
@@ -13,7 +30,7 @@ And so, we are left with diamond etherscan, a workaround to support etherscan in
 1. Input your diamond address and network on the diamond etherscan website
 2. Generate your dummy diamond implementation
 
-### Via the cli
+### Via the CLI
 
 First you will need to rename .env.example to .env and add the appropriate block explorer / infura api keys. We use `[UPPERCASE_NETWORK_NAME]_EXPLORER_API_KEY`.
 
@@ -25,22 +42,6 @@ yarn run generate-dummy [0xyourdiamondaddress] [yourNetwork]
 
 The dummy contract will be written to `contracts/dummy/DummyDiamondImplementation.sol`
 
-## How it works
-
-Diamond Etherscan has two components.
-
-The first is a script to generate a "Dummy Implementation" of your diamond located at [`scripts/runGenerateDummy.ts`](https://github.com/zdenham/diamond-etherscan/blob/main/scripts/runGenerateDummy.ts). This uses the etherscan API to grab all of your facets' ABI and then generates a noop mock of your whole diamond. **Note** this will only work for verified facets. The generation script now supports advanced struct types.
-
-The second is a Facet called [`DiamondEtherscanFacet.sol`](https://github.com/zdenham/diamond-etherscan/blob/main/contracts/facets/DiamondEtherscanFacet.sol) that implements [EIP-1967](https://eips.ethereum.org/EIPS/eip-1967) so you can point your diamond proxy to that implementation. Because all of your diamonds function signatures are implemented in the dummy, etherscan which knows about EIP-1967 will be able to appropriately display functions for interaction.
-
-
-## How to support etherscan in your diamond
-
-1. Generate your dummy implementation (via the website / cli or manually)
-2. Deploy your dummy implementation
-3. Add the EtherscanFacet to your diamond
-4. Set the proxy implementation to point to the deployed dummy
-5. Repeat any time you update the diamond
 
 
 ## Example

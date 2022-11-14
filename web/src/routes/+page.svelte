@@ -1,4 +1,5 @@
 <script lang="ts">
+	import GithubButton from '../components/GithubButton.svelte';
 	import Lottie from '../components/Lottie.svelte';
 
 	export const networkNames = {
@@ -58,17 +59,7 @@
 <div class="wrapper">
 	<div class="header">
 		<h1>Diamond Etherscan</h1>
-		<a
-			class="github-button"
-			href="https://github.com/zdenham/diamond-etherscan"
-			data-size="large"
-			data-show-count="true"
-			aria-label="Star zdenham/diamond-etherscan on GitHub"
-			target="_blank"
-			rel="noreferrer"
-		>
-			Github ⭐️
-		</a>
+		<GithubButton />
 	</div>
 
 	<div class="main">
