@@ -1,4 +1,5 @@
 # Diamond Etherscan
+<img width="700" alt="Drawing-24 sketchpad" src="https://user-images.githubusercontent.com/16373521/201744337-6c333ed0-6f3b-440f-8f00-f22a195cb08d.png">
 
 ## Motivation
 
