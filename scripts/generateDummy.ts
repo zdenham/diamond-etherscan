@@ -3,14 +3,18 @@ import { generateDummyContract } from "../utils/generateDummyContract.js";
 import * as fs from "fs";
 
 const main = async () => {
-  const facets = await fetchFacets(
-    "0x86935f11c86623dec8a25696e1c19a8659cbf95d",
-    "polygon"
-  );
+  const diamondAddress = process.argv[3];
+  const network = process.argv[4];
+
+  if (!diamondAddress || !network) {
+    throw new Error("missing argument");
+  }
+
+  const facets = await fetchFacets(diamondAddress, network);
 
   const contractString = generateDummyContract(facets, {
-    network: "polygon",
-    diamondAddress: "0x86935f11c86623dec8a25696e1c19a8659cbf95d",
+    network,
+    diamondAddress,
   });
 
   fs.writeFileSync(
