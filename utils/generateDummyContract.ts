@@ -2,8 +2,8 @@ import { Contract } from "ethers";
 import type { FunctionFragment, ParamType } from "ethers/lib/utils.js";
 
 type GenerateContractParams = {
-  diamondAddress: string;
-  network: string;
+  diamondAddress?: string;
+  network?: string;
   spdxIdentifier?: string;
   solidityVersion?: string;
 };
@@ -55,13 +55,9 @@ const getContractString = ({
   network,
 }: GetContractStringParams) => `
 // SPDX-License-Identifier: ${spdxIdentifier || "MIT"}
-pragma solidity ${solidityVersion || "^0.8.0"};
+pragma solidity ${solidityVersion || "^0.8.18"};
 
-/**
- * This is a generated dummy diamond implementation for compatibility with 
- * etherscan. For full contract implementation, check out the diamond on louper:
- * https://louper.dev/diamond/${diamondAddress}?network=${network}
- */
+${generateComment(diamondAddress, network)}
 
 contract DummyDiamondImplementation {
 ${structs.reduce((all, struct) => {
@@ -222,4 +218,16 @@ const dedoop = (str: string, index: number, allmembers: string[]) => {
   }
 
   return true;
+};
+
+const generateComment = (diamondAddress: string, network: string) => {
+  if (!diamondAddress || !network) {
+    return "";
+  }
+
+  return `/**
+ * This is a generated dummy diamond implementation for compatibility with 
+ * etherscan. For full contract implementation, check out the diamond on louper:
+ * https://louper.dev/diamond/${diamondAddress}?network=${network}
+ */`;
 };
