@@ -5,7 +5,7 @@ import * as fs from "fs";
 const main = async () => {
   const abiPath = process.argv[2];
 
-  const abi = JSON.parse(fs.readFileSync(abiPath, "utf8"));
+  const { abi } = JSON.parse(fs.readFileSync(abiPath, "utf8"));
 
   if (!abi) {
     throw new Error("missing abi path");

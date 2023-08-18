@@ -6,3 +6,4 @@ artifacts
 .env
 
 contracts/dummy/*
+./contracts/dummy/*

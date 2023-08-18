@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "generate-dummy": "node --loader ts-node/esm ./scripts/runGenerateDummy.ts"
+    "generate-dummy": "node --loader ts-node/esm ./scripts/runGenerateDummy.ts",
+    "generate-dummy-from-abi": "node --loader ts-node/esm ./scripts/runGenerateDummyFromAbi.ts"
   },
   "repository": {
     "type": "git",
