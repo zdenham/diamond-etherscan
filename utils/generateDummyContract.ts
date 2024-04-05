@@ -20,7 +20,7 @@ export const generateDummyContract = (
     solidityVersion,
     diamondAddress,
     network,
-  }: GenerateContractParams
+  }: GenerateContractParams,
 ): string => {
   const structs = facetList
     .reduce((structsArr, contract) => {
@@ -73,7 +73,7 @@ const getFormattedSignatures = (facet: Contract) => {
   const signatures = Object.keys(facet.interface.functions);
 
   return signatures.map((signature) =>
-    formatSignature(facet.interface.functions[signature])
+    formatSignature(facet.interface.functions[signature]),
   );
 };
 
@@ -197,7 +197,7 @@ const recursiveFormatStructs = (param: ParamType): string[] => {
   const structMembers = param.components.map(formatStructMember);
   const struct = `    struct ${getTupleName(param)} {${structMembers.reduce(
     (allMembers, member) => `${allMembers}${member}`,
-    ""
+    "",
   )}\n    }`;
 
   return [struct, ...otherStructs];

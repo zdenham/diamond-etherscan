@@ -17,7 +17,7 @@ const main = async () => {
 
   fs.writeFileSync(
     "./contracts/dummy/DummyDiamondImplementation.sol",
-    contractString
+    contractString,
   );
 };
 

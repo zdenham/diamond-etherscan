@@ -120,6 +120,22 @@ export const NETWORKS: Record<string, Network> = {
     emoji: "🧪",
     chainId: "69",
   },
+  base: {
+    title: "Base",
+    rpcUrl: "https://rpc.notadegen.com/base/sepolia",
+    explorerUrl: "https://basescan.org/",
+    explorerApiUrl: "https://api.basescan.org/api",
+    emoji: "🔵",
+    chainId: "8453",
+  },
+  base_sepolia: {
+    title: "Base Sepolia",
+    rpcUrl: "https://rpc.notadegen.com/base/sepolia",
+    explorerUrl: "https://sepolia.basescan.org/",
+    explorerApiUrl: "https://api-sepolia.basescan.org/api",
+    emoji: "🧪",
+    chainId: "84532",
+  },
   abritrum: {
     title: "Arbitrum",
     rpcUrl: "https://arb1.arbitrum.io/rpc",
