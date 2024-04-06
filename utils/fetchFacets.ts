@@ -42,7 +42,7 @@ const getFacetAbi = async (facetAddress: string, network: string) => {
 
 export const fetchFacets = async (
   diamondAddress: string,
-  network: string
+  network: string,
 ): Promise<Contract[]> => {
   let facetAddresses = await getFacetAddresses(diamondAddress, network);
   const allContracts = [];
